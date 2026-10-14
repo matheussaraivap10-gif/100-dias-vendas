@@ -3,7 +3,6 @@ export default async function handler(req, res) {
     return res.status(405).json({ message: 'Método não permitido' });
   }
 
-  // Access Token do Mercado Pago
   const accessToken = process.env.MP_ACCESS_TOKEN || "APP_USR-5196315562790978-101312-4b40d27c121d97b7d360d44e1729b039-3762639342";
 
   try {
@@ -22,6 +21,9 @@ export default async function handler(req, res) {
             currency_id: 'BRL'
           }
         ],
+        payer: {
+          email: 'matheussaraivap10@gmail.com'
+        },
         back_urls: {
           success: 'https://100-dias-vendas-phwy.vercel.app/sucesso.html',
           failure: 'https://100-dias-vendas-phwy.vercel.app/erro.html',
