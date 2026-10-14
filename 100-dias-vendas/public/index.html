@@ -1,229 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-BR" class="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>100 Dias de Confiança — Treinamento Prático</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://sdk.mercadopago.com/js/v2"></script>
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap');
-    body {
-      font-family: 'Plus Jakarta Sans', sans-serif;
-      background-color: #080808;
-      color: #F5F5F7;
-      overflow-x: hidden;
-    }
-  </style>
-</head>
-<body class="bg-[#080808] text-slate-100 antialiased">
-
-  <!-- HERO SECTION -->
-  <section class="relative min-h-screen flex items-center justify-center pt-20 pb-16 px-6 overflow-hidden">
-    <div class="absolute top-1/4 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-red-600/10 rounded-full blur-[120px] pointer-events-none"></div>
-    <div class="max-w-4xl mx-auto text-center relative z-10">
-      <span class="inline-block px-4 py-1.5 mb-6 text-xs font-bold tracking-widest text-red-500 uppercase bg-red-500/10 border border-red-500/20 rounded-full">
-        TREINAMENTO PRÁTICO DE 100 DIAS
-      </span>
-      <h1 class="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight text-white mb-6 leading-[1.1]">
-        Você não precisa virar <br class="hidden sm:inline" />
-        <span class="text-transparent bg-clip-text bg-gradient-to-r from-white via-slate-200 to-slate-400">outra pessoa.</span>
-      </h1>
-      <p class="text-lg sm:text-xl text-slate-400 max-w-2xl mx-auto mb-10 font-light leading-relaxed">
-        Talvez você só precise parar de editar tudo o que pensa antes de agir. 
-        <strong class="text-white font-normal block mt-2">100 Dias de Confiança</strong> é um método passo a passo para reduzir a autocensura, agir com espontaneidade e construir segurança no dia a dia.
-      </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-        <a href="#questionario" class="w-full sm:w-auto bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl transition-all shadow-xl shadow-red-600/25 text-center">
-          FAZER O TESTE GRATUITO →
-        </a>
-        <a href="#oferta" class="w-full sm:w-auto bg-white/5 hover:bg-white/10 text-slate-300 font-semibold px-8 py-4 rounded-xl transition-all border border-white/10 text-center">
-          IR DIRETO PARA A OFERTA
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- DESTAQUES -->
-  <section class="py-12 border-y border-white/5 bg-[#0b0b0b]">
-    <div class="max-w-5xl mx-auto px-6 grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-      <div>
-        <div class="text-3xl font-black text-white mb-1">100 Dias</div>
-        <div class="text-xs text-slate-400 uppercase tracking-wider">Desafios diários e práticos</div>
-      </div>
-      <div>
-        <div class="text-3xl font-black text-white mb-1">100% Prático</div>
-        <div class="text-xs text-slate-400 uppercase tracking-wider">Sem teorias cansativas</div>
-      </div>
-      <div>
-        <div class="text-3xl font-black text-white mb-1">Acesso Imediato</div>
-        <div class="text-xs text-slate-400 uppercase tracking-wider">Comece em menos de 2 minutos</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- QUESTIONÁRIO SECTION -->
-  <section id="questionario" class="py-24 px-6 relative bg-[#0a0a0a]">
-    <div class="max-w-2xl mx-auto">
-      <div class="text-center mb-12">
-        <span class="text-xs font-bold tracking-widest text-red-500 uppercase">DIAGNÓSTICO GRATUITO</span>
-        <h2 class="text-3xl font-extrabold text-white mt-2">Descubra seu nível de autocensura</h2>
-      </div>
-      
-      <!-- CAIXA DO QUIZ -->
-      <div id="quiz-box" class="bg-[#121212] border border-neutral-800 rounded-2xl p-6 sm:p-10 shadow-2xl relative">
-        <div class="mb-8 flex justify-between items-center text-xs font-semibold text-slate-400 uppercase tracking-wider">
-          <span id="quiz-step-indicator">Pergunta 1 de 10</span>
-        </div>
-        <h3 id="quiz-question-title" class="text-xl sm:text-2xl font-bold text-white mb-8 min-h-[4rem] flex items-center">
-          Carregando pergunta...
-        </h3>
-        <div id="quiz-options" class="space-y-3 mb-8"></div>
-        <div class="flex justify-between items-center pt-4 border-t border-white/5">
-          <button id="quiz-prev-btn" onclick="prevQuestion()" class="text-xs font-semibold text-slate-400 hover:text-white transition-colors disabled:opacity-40 disabled:cursor-not-allowed" disabled>
-            ← Voltar
-          </button>
-          <button id="quiz-next-btn" onclick="nextQuestion()" class="bg-white/10 hover:bg-white/20 text-white text-xs font-bold px-6 py-3 rounded-xl transition-all disabled:opacity-40 disabled:cursor-not-allowed" disabled>
-            Próxima →
-          </button>
-        </div>
-      </div>
-
-      <!-- RESULTADO -->
-      <div id="result-box" class="hidden bg-[#121212] border border-neutral-800 rounded-2xl p-6 sm:p-10 shadow-2xl text-center">
-        <span class="text-xs font-bold tracking-widest text-red-500 uppercase block mb-2">SEU RESULTADO</span>
-        <h3 id="result-mode-title" class="text-3xl sm:text-4xl font-extrabold text-white mb-6"></h3>
-        <p id="result-mode-desc" class="text-sm text-slate-300 mb-8 max-w-lg mx-auto font-light"></p>
-        <div class="bg-black/40 border border-white/5 rounded-xl p-6 text-left mb-8">
-          <ul id="result-bullets" class="space-y-3 text-sm text-slate-200"></ul>
-        </div>
-        <a href="#oferta" class="inline-flex items-center justify-center w-full bg-red-600 hover:bg-red-700 text-white font-bold px-8 py-4 rounded-xl transition-all">
-          QUERO COMEÇAR O MÉTODO AGORA →
-        </a>
-      </div>
-    </div>
-  </section>
-
-  <!-- OFERTA & CHECKOUT NATIVO -->
-  <section id="oferta" class="py-24 px-6 bg-[#0a0a0a] border-t border-white/5 relative overflow-hidden">
-    <div class="max-w-xl mx-auto text-center relative z-10">
-      <div class="bg-[#121212] border border-neutral-800 rounded-3xl p-8 sm:p-12 shadow-2xl">
-        <span class="text-xs font-bold tracking-widest text-red-500 uppercase block mb-2">OFERTA ESPECIAL DE LANÇAMENTO</span>
-        <h2 class="text-3xl font-extrabold text-white mb-4">100 Dias de Confiança</h2>
-        <div class="text-slate-400 text-sm line-through mb-1">De R$ 97,00</div>
-        <div class="text-5xl font-black text-white mb-6">R$ 19,90</div>
-        <p class="text-slate-400 text-xs mb-8">Acesso imediato • Pagamento direto e seguro</p>
-
-        <button id="btn-comprar" class="block w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-4 px-8 rounded-xl transition-all shadow-xl shadow-red-600/25 text-center text-lg">
-          COMPRAR AGORA (PIX / CARTÃO) →
-        </button>
-
-        <!-- CONTAINER DO CHECKOUT NATIVO -->
-        <div id="payment-brick-container" class="hidden mt-6 bg-white rounded-2xl p-4 text-slate-900"></div>
-      </div>
-    </div>
-  </section>
-
-  <script>
-    const questions = [
-      "Você costuma editar mentalmente uma frase antes de falar?",
-      "Depois de uma conversa, você fica pensando no que poderia ter respondido?",
-      "Você deixa de fazer algo porque imagina como outras pessoas vão reagir?",
-      "Você demora para tomar decisões simples mesmo sabendo o que quer?",
-      "Você sente que pensa demais antes de tomar iniciativa?",
-      "Quando percebe que falou algo estranho, continua pensando nisso depois?",
-      "Você procura a resposta 'perfeita' em vez de simplesmente responder?",
-      "Você sente que sua espontaneidade diminuiu?",
-      "Você sabe que deveria agir, mas continua esperando sentir vontade ou confiança?",
-      "Quando surge uma oportunidade, você pensa tanto que acaba perdendo o momento?"
-    ];
-
-    const options = [
-      { text: "Nunca", points: 0 },
-      { text: "Às vezes", points: 1 },
-      { text: "Frequentemente", points: 2 },
-      { text: "Quase sempre", points: 3 }
-    ];
-
-    let currentQuestion = 0;
-    let answers = new Array(questions.length).fill(null);
-
-    function renderQuestion() {
-      const qTitle = document.getElementById('quiz-question-title');
-      const qIndicator = document.getElementById('quiz-step-indicator');
-      const prevBtn = document.getElementById('quiz-prev-btn');
-      const nextBtn = document.getElementById('quiz-next-btn');
-
-      if (!qTitle) return;
-
-      qTitle.textContent = (currentQuestion + 1) + ". " + questions[currentQuestion];
-      qIndicator.textContent = "Pergunta " + (currentQuestion + 1) + " de " + questions.length;
-      prevBtn.disabled = currentQuestion === 0;
-
-      nextBtn.disabled = answers[currentQuestion] === null;
-      nextBtn.textContent = currentQuestion === questions.length - 1 ? "Ver Resultado →" : "Próxima →";
-
-      const qOptions = document.getElementById('quiz-options');
-      qOptions.innerHTML = '';
-
-      options.forEach(opt => {
-        const isSelected = answers[currentQuestion] === opt.points;
-        const btn = document.createElement('button');
-        btn.className = "w-full text-left p-4 rounded-xl border transition-all flex justify-between text-sm " +
-          (isSelected ? "border-red-600 bg-red-600/10 text-white font-semibold" : "border-neutral-800 bg-[#161616] text-slate-300 hover:border-slate-600");
-        btn.innerHTML = "<span>" + opt.text + "</span>";
-        btn.onclick = () => {
-          answers[currentQuestion] = opt.points;
-          renderQuestion();
-        };
-        qOptions.appendChild(btn);
-      });
-    }
-
-    function nextQuestion() {
-      if (currentQuestion < questions.length - 1) {
-        currentQuestion++;
-        renderQuestion();
-      } else {
-        showResult();
-      }
-    }
-
-    function prevQuestion() {
-      if (currentQuestion > 0) {
-        currentQuestion--;
-        renderQuestion();
-      }
-    }
-
-    function showResult() {
-      document.getElementById('quiz-box').classList.add('hidden');
-      document.getElementById('result-box').classList.remove('hidden');
-
-      const totalScore = answers.reduce((a, b) => a + b, 0);
-      let modeTitle = "", bullets = [];
-
-      if (totalScore <= 7) {
-        modeTitle = "MODO LIVRE";
-        bullets = ["Excelente nível de espontaneidade", "Sua autocensura é baixa no dia a dia", "O método vai te ajudar a manter essa consistência"];
-      } else if (totalScore <= 15) {
-        modeTitle = "MODO ALERTA";
-        bullets = ["Você costuma repensar bastante antes de agir", "Pequenas hesitações estão travando suas iniciativas", "Aprenda a agir antes de editar tudo mentalmente"];
-      } else if (totalScore <= 23) {
-        modeTitle = "MODO FISCAL";
-        bullets = ["A autocensura consome muita da sua energia diária", "Você analisa demais cenários antes de falar ou fazer algo", "O treinamento vai reprogramar essa resposta automática"];
-      } else {
-        modeTitle = "MODO AUTOCENSURA";
-        bullets = ["Sua mente trava ações por excesso de filtro", "Análise excessiva gera paralisia diária", "Necessidade urgente de práticas de espontaneidade"];
-      }
-
-      document.getElementById('result-mode-title').textContent = "Você está no " + modeTitle;
-      document.getElementById('result-bullets').innerHTML = bullets.map(b => "<li>• " + b + "</li>").join('');
-    }
-
-    window.addEventListener('DOMContentLoaded', renderQuestion);
-
-    // LÓGICA DO CHECKOUT TRANSPARENTE
+// LÓGICA DO CHECKOUT TRANSPARENTE
     document.getElementById('btn-comprar').addEventListener('click', async () => {
       const btn = document.getElementById('btn-comprar');
       btn.innerText = "Carregando opções de pagamento...";
@@ -240,8 +15,19 @@
           btn.classList.add('hidden');
 
           mp.bricks().create("payment", "payment-brick-container", {
-            initialization: { preferenceId: data.id, amount: 19.90 },
-            customization: { paymentMethods: { pix: "all", creditCard: "all" } }
+            initialization: { 
+              preferenceId: data.id, 
+              amount: 19.90,
+              payer: {
+                email: 'matheussaraivap10@gmail.com'
+              }
+            },
+            customization: { 
+              paymentMethods: { 
+                pix: "all", 
+                creditCard: "all" 
+              } 
+            }
           });
         } else {
           alert("Erro ao conectar com o pagamento do Mercado Pago.");
@@ -255,6 +41,3 @@
         btn.disabled = false;
       }
     });
-  </script>
-</body>
-</html>
