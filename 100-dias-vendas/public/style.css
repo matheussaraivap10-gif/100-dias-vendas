@@ -1,0 +1,121 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  background-color: #0f172a;
+  color: #f8fafc;
+  line-height: 1.6;
+  padding: 24px 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.container, main, section {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+header, #hero {
+  text-align: center;
+  padding: 32px 20px;
+  background: #1e293b;
+  border-radius: 16px;
+  margin-bottom: 24px;
+  border: 1px solid #334155;
+}
+
+h1 {
+  font-size: 1.8rem;
+  color: #ffffff;
+  margin-bottom: 16px;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 1.4rem;
+  color: #38bdf8;
+  margin-bottom: 12px;
+}
+
+p {
+  color: #94a3b8;
+  font-size: 1rem;
+  margin-bottom: 20px;
+}
+
+/* Botões */
+button, .btn, a.btn {
+  display: block;
+  width: 100%;
+  padding: 14px 20px;
+  background-color: #2563eb;
+  color: #ffffff;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: all 0.2s ease;
+  margin-top: 10px;
+}
+
+button:hover, .btn:hover {
+  background-color: #1d4ed8;
+  transform: translateY(-2px);
+}
+
+/* Opções do Teste */
+.opcao, .option-btn {
+  background-color: #0f172a;
+  border: 2px solid #334155;
+  color: #f1f5f9;
+  padding: 14px 18px;
+  border-radius: 8px;
+  text-align: left;
+  cursor: pointer;
+  margin-bottom: 10px;
+  transition: border-color 0.2s;
+}
+
+.opcao:hover, .option-btn:hover {
+  border-color: #38bdf8;
+}
+
+.opcao.selected, .option-btn.selected {
+  border-color: #2563eb;
+  background-color: #1e3a8a;
+  color: #ffffff;
+}
+
+/* Navegação do Quiz */
+.quiz-nav {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.btn-voltar, .btn-secondary {
+  background-color: #334155;
+  color: #cbd5e1;
+}
+
+.btn-voltar:hover, .btn-secondary:hover {
+  background-color: #475569;
+}
+
+/* Preço e Oferta */
+.preco {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #10b981;
+  margin: 16px 0;
+}
